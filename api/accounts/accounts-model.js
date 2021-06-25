@@ -1,9 +1,12 @@
+const db = require('../../data/db-config');
+
 const getAll = () => {
-  // DO YOUR MAGIC
+  // grabs an array of accounts
+  return db.select().table('accounts')
 }
 
 const getById = id => {
-  // DO YOUR MAGIC
+  
 }
 
 const create = account => {
