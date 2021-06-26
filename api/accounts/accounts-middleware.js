@@ -40,18 +40,20 @@ exports.checkAccountNameUnique = async (req, res, next) => {
 
 }
 
-exports.checkAccountId = async (req, res, next) => {
+exports.checkAccountId = (req, res, next) => {
   // - `checkAccountId` returns a status 404 with a `{ message: "account not found" }` if `req.params.id` does not exist in the database
-  try {
-    const account = await Accounts.getById(req.params.id)
-    if (account) {
-      next()
-    } else {
-      res.status(404).json({message: "account not found"})
-    }
-  } catch (error) {
-    next(error)
-  }
+ Accounts.getById(req.params.id)
+ .then(account => {
+   if (account) {
+     req.account = account
+     next()
+   } else {
+     res.status(404).json({message: "account not found"})
+   }
+ })
+ .catch(error => {
+   next(error)
+ })
 }
 
 
