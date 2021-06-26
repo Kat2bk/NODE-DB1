@@ -12,7 +12,7 @@ async function getById(id) {
 
 async function create(account) {
   // creates an account
-const [id] = await db('accounts').insert(account, ['id'])
+const [id] = await db('accounts').insert(account, ['id']['name'])
 return getById(id)
 }
 

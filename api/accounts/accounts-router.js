@@ -19,7 +19,8 @@ router.get('/:id', checkAccountId, async (req, res, next) => {
 
 router.post('/', checkAccountPayload, checkAccountNameUnique, async (req, res, next) => {
   try {
-    const account = await Accounts.create(req.body)
+     const account = await Accounts.create(req.body)
+    res.status(201).json(account)
   } catch (error) {
     next(error)
   }
@@ -34,6 +35,7 @@ router.delete('/:id', (req, res, next) => {
 })
 
 router.use((err, req, res, next) => { // eslint-disable-line
+  console.error(err.stack)
   res.status(500 || err.status)
   res.render({
     message: err.message,
