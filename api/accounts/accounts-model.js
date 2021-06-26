@@ -16,7 +16,7 @@ const [id] = await db.select('accounts').insert(account, ['id'])
 return getById(id)
 }
 
-async  function updateById(id, account) {
+async function updateById(id, account) {
  await db.select('accounts').where({id}).update(account)
 }
 
